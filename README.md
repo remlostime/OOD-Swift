@@ -1,2 +1,4 @@
 # OOD-Swift
-OOD in Swift
+* Factory
+* Decorator
+* Strategy
