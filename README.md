@@ -2,3 +2,8 @@
 * Factory
 * Decorator
 * Strategy
+* Prototype
+* Proxy
+* Template
+* Facade
+[Facade Pattern](Facade/facade-pattern.png)
