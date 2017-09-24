@@ -1,5 +1,7 @@
 //: Playground - noun: a place where people can play
 
+import Foundation
+
 protocol Currency {
   func symbol() -> String
   func code() -> String
@@ -35,6 +37,16 @@ class China: Currency {
   }
 }
 
+class ErrorCurrency: Currency {
+  func symbol() -> String {
+    return "Error symbol"
+  }
+  
+  func code() -> String {
+    return "Error code"
+  }
+}
+
 enum Country {
   case USA
   case China
@@ -57,3 +69,24 @@ class CurrencyFactory {
 let currency = CurrencyFactory.getCurrency(.China)
 currency.code()
 currency.symbol()
+
+
+// Reflection - Get class dynamiclly
+func classFromString(_ className: String) -> Currency {
+  
+  guard let namespace = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String else {
+    return ErrorCurrency()
+  }
+  
+  guard let cls = NSClassFromString("\(namespace).\(className)") as? Currency else {
+    return ErrorCurrency()
+  }
+  
+  return cls
+}
+
+let className = "US"
+let currencyClass = classFromString(className)
+currencyClass.code()
+currencyClass.symbol()
+
